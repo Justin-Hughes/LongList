@@ -79,12 +79,13 @@ namespace Tracker
 
             while (stillWorking)
             {
-                int currentListIndex = pageIndex + currentSelection;
-                PrintPage (Page); //Havin this here auto refreshes the page
-                Console.SetCursorPosition (Console.CursorLeft, (Console.CursorTop + currentSelection));
-                ConsoleKey input = Console.ReadKey ().Key; // receives the button input
-                Console.WriteLine (); // 
+                int currentListIndex = pageIndex + currentSelection;// assigns the current Page[] index value to currentListIndex
 
+                PrintPage (Page); //Having this here auto refreshes the page
+
+                Console.SetCursorPosition (Console.CursorLeft, (Console.CursorTop + currentSelection));// sets cursor to current selection
+
+                ConsoleKey input = Console.ReadKey ().Key; // receives the button input
 
                 if (input == ConsoleKey.F1) // add new items to list
                 {
@@ -92,11 +93,8 @@ namespace Tracker
                     Console.WriteLine ("What would you like to add?");
                     string inputPage;
                     bool inputCheck;
-                    //Console.WriteLine ("Press Esc to cancel."); 
                     do
                     {
-                        //if (Keyboard.IsKeyDown (Key.Escape))     Requires .NET Core 3.0
-                        //{ goto End; }
                         inputPage = Console.ReadLine ();
                         inputCheck = inputPage.StartsWith ("* /");
                         if (inputCheck == true)
@@ -106,7 +104,6 @@ namespace Tracker
                     } while (inputCheck == true);
 
                     Page.Add (inputPage);
-                    //End:
                     Console.CursorTop = (6 + currentSelection);
 
                 }
@@ -193,7 +190,6 @@ namespace Tracker
                         {
                             pageIndex -= 20;
                         }
-                        PrintPage (Page);
                     }
                 }
 
@@ -223,7 +219,6 @@ namespace Tracker
                 else if (input == ConsoleKey.F6) // Refreshes the page and resets selection to top
                 {
                     currentSelection = 0;
-                    PrintPage (Page);
                 }
 
                 else if (input == ConsoleKey.F7) // Save file
@@ -257,34 +252,6 @@ namespace Tracker
                         stillWorking = false;
                     }
                 }
-
-                //else if (input == ConsoleKey.Escape) // Exits without saving
-                //{
-                //    Console.SetCursorPosition (Console.CursorLeft, 26);
-                //    do
-                //    {
-                //        try
-                //        {
-                //            Console.WriteLine ();
-                //            Console.WriteLine ("Would you like to exit without saving? (y/n)");
-                //            verify = Convert.ToChar (Console.ReadLine ());
-                //            escape = true;
-                //        }
-                //        catch (FormatException)
-                //        {
-                //            Console.WriteLine ("Please enter a y or an n.");
-                //            escape = false;
-                //        }
-
-                //    } while (escape != true);
-
-                //    if (verify == 'y')
-                //    {
-                //        SaveList ();
-                //        stillWorking = false;
-                //    }
-                //}
-
 
                 else if (input == ConsoleKey.DownArrow)
                 {
@@ -382,7 +349,7 @@ namespace Tracker
                     string line;
                     while ((line = load.ReadLine ()) != null)
                     {
-                        Page.Add (line); // Add to list.
+                        Page.Add (line); 
                     }
                 }
             }
